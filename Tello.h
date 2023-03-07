@@ -19,8 +19,8 @@ public:
     ~Tello();
     void start();
     void stop();
-    void enableCamera();
-    void disableCamera();
+    void enableStream();
+    void disableStream();
     bool isStarted(){ return started; };
 
     TelloCommand *tello_command;
@@ -34,13 +34,14 @@ private:
     QThread *thread_state;
     QThread *thread_stream;
 
-    QString address_str = "192.168.10.1";
+    //QString address_str = "192.168.10.1";
+    QString address_str = "192.168.1.57";
     quint16 port_command = 8889;
     quint16 port_state = 8890;
     quint16 port_stream = 11111;
 
 private slots:
-    void cameraEnabled();
+    void cameraAvailable();
 };
 
 #endif // TELLO_H

@@ -32,8 +32,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-INCLUDEPATH += C:\Users\adoucet\Documents\PROJET_LOCAL\opencv\custom_build_QT6\include
-OPENCV_DIR = C:\Users\adoucet\Documents\PROJET_LOCAL\opencv\custom_build_QT6
+INCLUDEPATH += D:\Documents\Dev\opencv\build-custom\include
+OPENCV_DIR = D:\Documents\Dev\opencv\build-custom
 
 LIBS += $$OPENCV_DIR\bin\libopencv_calib3d470.dll
 LIBS += $$OPENCV_DIR\bin\libopencv_core470.dll

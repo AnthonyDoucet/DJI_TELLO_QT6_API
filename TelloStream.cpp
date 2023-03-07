@@ -3,7 +3,6 @@
 TelloStream::TelloStream(QString a, quint16 p): address(a),port(p){
     url = "udp://@" + address.toStdString() + ":" + QString::number(port).toStdString();
     camera_enabled = false;
-    //capture = new VideoCapture(0);
 }
 
 TelloStream::~TelloStream(){
@@ -11,7 +10,8 @@ TelloStream::~TelloStream(){
 }
 
 bool TelloStream::startVideoCapture(){
-    capture = new VideoCapture(url);
+    //capture = new VideoCapture(url);
+    capture = new VideoCapture(0);
     return capture->isOpened();
 }
 

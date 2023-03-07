@@ -16,9 +16,20 @@ class TelloCommand: public QObject
 public:
     TelloCommand(QHostAddress a, quint16 p);
     ~TelloCommand();
-    bool sdkModeEnabled(){ return sdk_mode_enabled; };
+
+    void takeoff();
+    void land();
+    void emergency();
+
+    void setPosition(int, int, int, int);
+    void setSpeed(int);
+    //void getSpeed();
+
     void sendCommand_generic(QByteArray cmd);
-    void sendCommand_waitResponse(QByteArray cmd);
+    //void sendCommand_waitResponse(QByteArray cmd);
+    bool sdkModeEnabled(){ return sdk_mode_enabled; };
+    bool isFlying(){ return flying; };
+    QString getLastCommandUsed(){ return lastCommandUsed; };
 
 public slots:
     void running(bool r){ isRunning = r; };
@@ -28,10 +39,11 @@ private:
     QUdpSocket *socket;
     QHostAddress ip;
     quint16 port;
-    bool isRunning, sdk_mode_enabled, snr_requested, generic_command_requested;
+    bool isRunning, flying, sdk_mode_enabled, snr_requested, generic_command_requested, wait_command_requested;
     int timeout_counter;
     QString lastCommandUsed;
     void sendCommand_SNR();
+    //void waitResponse();
 
 private slots:
     void readResponse();

@@ -45,10 +45,16 @@ void MainWindow::displayStream(QPixmap frame){
 }
 
 void MainWindow::on_pushButton_2_clicked(){
-    tello->enableCamera();
+    tello->enableStream();
 }
 
 void MainWindow::on_pushButton_3_clicked(){
-    tello->disableCamera();
+    tello->disableStream();
+}
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    tello->tello_command->sendCommand_generic("uwu");
 }
 
