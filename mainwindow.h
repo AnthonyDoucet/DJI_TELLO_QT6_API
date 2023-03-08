@@ -2,9 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <Tello.h>
-#include <TelloEnumTypes.h>
-#include <TelloCommand.h>
+#include <Tello/Tello.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,13 +22,10 @@ public slots:
     void processResponseSignal(TelloResponse, QString);
     void processSNR(int snr);
     void displayStream(QPixmap frame);
+    void processAlertSignal(TelloAlerts);
 
 private slots:
     void on_pushButton_2_clicked();
-
-    void on_pushButton_3_clicked();
-
-    void on_pushButton_4_clicked();
 
 private:
     Ui::MainWindow *ui;

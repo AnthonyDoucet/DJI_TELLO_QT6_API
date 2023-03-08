@@ -15,6 +15,9 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -31,7 +34,7 @@
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>40</y>
+      <y>30</y>
       <width>611</width>
       <height>351</height>
      </rect>
@@ -50,6 +53,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -62,27 +68,11 @@
      <string>Enable Camera</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>140</y>
-      <width>111</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Disable Camera</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>190</y>
+      <x>10</x>
+      <y>160</y>
       <width>201</width>
       <height>101</height>
      </rect>
@@ -111,17 +101,17 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QLabel" name="label_status">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>90</y>
-      <width>101</width>
-      <height>41</height>
+      <x>10</x>
+      <y>10</y>
+      <width>231</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Not started</string>
     </property>
    </widget>
   </widget>
