@@ -21,11 +21,4 @@ enum class TelloAlerts {
     SOCKET_CONNECTION_FAILED,
 };
 
-enum class TelloActivity {
-    TELLO_STARTED_FLYING,
-    TELLO_STOPPED_FLYING,
-    TELLO_START_STREAMING,
-    TELLO_STOP_STREAMING
-};
-
 #endif // TELLOENUMTYPES_H

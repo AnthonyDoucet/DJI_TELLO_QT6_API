@@ -17,15 +17,17 @@ public:
     ~MainWindow();
 
 public slots:
-    void on_pushButton_clicked();
     void updateGUI();
     void processResponseSignal(TelloResponse, QString);
-    void processSNR(int snr);
     void displayStream(QPixmap frame);
     void processAlertSignal(TelloAlerts);
 
 private slots:
-    void on_pushButton_2_clicked();
+    void on_pushButton_clicked();
+    void on_btn_takeoff_clicked();
+    void on_btn_land_clicked();
+    void on_btn_emergency_clicked();
+    void on_btn_test_clicked();
 
 private:
     Ui::MainWindow *ui;

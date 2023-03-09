@@ -10,6 +10,8 @@
 #include <Tello/TelloState.h>
 #include <Tello/TelloStream.h>
 
+#define TELLO_DEBUG_OUTPUT false
+
 class Tello: public QObject
 {
     Q_OBJECT

@@ -2,9 +2,10 @@
 
 Tello::Tello(){
     started = false;
-
     QThread::currentThread()->setObjectName("Tello Main Thread");
-    qDebug() << "Starting" << QThread::currentThread();
+
+    if(TELLO_DEBUG_OUTPUT)
+        qDebug() << "Starting" << QThread::currentThread();
 
     //Init Tello Command Object and bind to Thread
     tello_command = new TelloCommand(QHostAddress(address_str), port_command);
@@ -39,6 +40,7 @@ Tello::~Tello(){
     delete thread_state;
     delete thread_stream;
 }
+
 
 void Tello::start(){
     if(started){
@@ -86,7 +88,8 @@ void Tello::cameraAvailable(){
     if(thread_stream->isRunning()){
         thread_stream->quit();
     }
-    camera_enabled = true;
+    //camera_enabled = true;
     thread_stream->start();
-    qDebug() << "Camera Thread Started";
+    if(TELLO_DEBUG_OUTPUT)
+        qDebug() << "Camera Thread Started";
 }

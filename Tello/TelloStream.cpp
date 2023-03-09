@@ -22,12 +22,14 @@ void TelloStream::stopStream(){
 void TelloStream::run(){
 
     while(!startVideoCapture()){
-        qDebug() << "Camera waiting";
+        if(TELLO_STREAM_DEBUG_OUTPUT)
+            qDebug() << "Camera waiting";
         camera_enabled = false;
         delete capture;
         QThread::sleep(5);
     }
-    qDebug() << "Camera ok";
+    if(TELLO_STREAM_DEBUG_OUTPUT)
+        qDebug() << "Camera ok";
     camera_enabled = true;
     Mat frame;
     while(camera_enabled){
