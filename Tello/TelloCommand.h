@@ -8,8 +8,9 @@
 #include <QtNetwork/QUdpSocket>
 #include <QtNetwork/QHostAddress>
 #include <Tello/TelloEnumTypes.h>
+#include <Tello/TelloLogger.h>
 
-#define TELLO_COMMAND_DEBUG_OUTPUT false
+#define TELLO_COMMAND_DEBUG_OUTPUT true
 
 class TelloCommand: public QObject
 {
@@ -25,7 +26,6 @@ public:
 
     void setPosition(int, int, int, int);
     void setSpeed(int);
-    //void getSpeed();
 
     void sendCommand_generic(QByteArray cmd);
     //void sendCommand_waitResponse(QByteArray cmd);
@@ -37,8 +37,10 @@ public:
 public slots:
     void running(bool r){ isRunning = r; };
     void run();
+    void updateStatus(TelloStatus new_status);
 
 private:
+    TelloStatus status;
     QUdpSocket *socket;
     QHostAddress ip;
     quint16 port;
@@ -54,9 +56,9 @@ private slots:
     void readResponse();
 
 signals:
-    void alertSignal(TelloAlerts);
     void responseSignal(TelloResponse, QString);
     void cameraEnabled();
+    void cameraDisable();
 
 };
 

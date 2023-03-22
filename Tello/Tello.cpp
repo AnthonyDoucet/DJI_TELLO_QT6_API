@@ -1,8 +1,8 @@
 #include "Tello.h"
 
 Tello::Tello(){
-    started = false;
     QThread::currentThread()->setObjectName("Tello Main Thread");
+    TelloLogger::write2log("##################### Tello Main Thread Started #####################");
 
     if(TELLO_DEBUG_OUTPUT)
         qDebug() << "Starting" << QThread::currentThread();
@@ -14,21 +14,14 @@ Tello::Tello(){
     tello_command->moveToThread(thread_command);
     connect(thread_command,&QThread::started,tello_command,&TelloCommand::run);
 
-    //Init Tello State Object and bind to Thread
+    //Init Tello State Object
     tello_state = new TelloState(QHostAddress(address_str), port_state);
-    thread_state = new QThread();
-    thread_state->setObjectName("Tello State Thread");
-    tello_state->moveToThread(thread_state);
-    connect(thread_state,&QThread::started,tello_state,&TelloState::run);
+    connect(tello_state,&TelloState::status,tello_command,&TelloCommand::updateStatus);
 
-    //Init Tello Command Object and Thread
+    //Init Tello Stream Object
     tello_stream = new TelloStream(address_str, port_stream);
-    thread_stream = new QThread();
-    thread_stream->setObjectName("Tello Stream Thread");
-    tello_stream->moveToThread(thread_stream);
-    connect(thread_stream,&QThread::started,tello_stream,&TelloStream::run);
-
-    connect(tello_command,&TelloCommand::cameraEnabled,this,&Tello::cameraAvailable);
+    connect(tello_command,&TelloCommand::cameraEnabled,tello_stream,&TelloStream::enableStream);
+    connect(tello_command,&TelloCommand::cameraDisable,tello_stream,&TelloStream::disableStream);
 }
 
 Tello::~Tello(){
@@ -37,10 +30,7 @@ Tello::~Tello(){
     delete tello_stream;
 
     delete thread_command;
-    delete thread_state;
-    delete thread_stream;
 }
-
 
 void Tello::start(){
     if(started){
@@ -48,9 +38,9 @@ void Tello::start(){
         return;
     }
     started = true;
+
     thread_command->start();
     tello_command->running(true);
-    thread_state->start();
 }
 
 void Tello::stop(){
@@ -64,32 +54,5 @@ void Tello::stop(){
     thread_command->quit();
     thread_command->wait();
 
-    thread_state->quit();
-    thread_state->wait();
-
-    thread_stream->quit();
-    thread_stream->wait();
-}
-
-void Tello::enableStream(){
-    tello_command->sendCommand_generic("streamon");
-}
-
-void Tello::disableStream(){
-    if(!camera_enabled){
-        qDebug() << "Stream not enabled";
-        return;
-    }
-    thread_stream->quit();
-    thread_stream->wait();
-}
-
-void Tello::cameraAvailable(){
-    if(thread_stream->isRunning()){
-        thread_stream->quit();
-    }
-    //camera_enabled = true;
-    thread_stream->start();
-    if(TELLO_DEBUG_OUTPUT)
-        qDebug() << "Camera Thread Started";
+    tello_stream->disableStream();
 }

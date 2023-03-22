@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>903</width>
-    <height>435</height>
+    <width>924</width>
+    <height>425</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QLabel" name="label_stream">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>260</x>
       <y>30</y>
       <width>611</width>
       <height>351</height>
@@ -124,6 +124,9 @@
       <height>24</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
@@ -168,13 +171,26 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="label_stream_size">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>10</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Size</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>903</width>
+     <width>924</width>
      <height>21</height>
     </rect>
    </property>

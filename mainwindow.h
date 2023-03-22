@@ -20,7 +20,7 @@ public slots:
     void updateGUI();
     void processResponseSignal(TelloResponse, QString);
     void displayStream(QPixmap frame);
-    void processAlertSignal(TelloAlerts);
+    void processAlertSignal(TelloStatus);
 
 private slots:
     void on_pushButton_clicked();

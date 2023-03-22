@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Tello/TelloLogger.cpp \
     main.cpp \
     mainwindow.cpp \
     Tello/Tello.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
     Tello/TelloStream.cpp
 
 HEADERS += \
+    Tello/TelloLogger.h \
     mainwindow.h \
     Tello/Tello.h \
     Tello/TelloEnumTypes.h \
@@ -50,3 +52,10 @@ LIBS += $$OPENCV_DIR\bin\libopencv_stitching470.dll
 LIBS += $$OPENCV_DIR\bin\libopencv_video470.dll
 LIBS += $$OPENCV_DIR\bin\libopencv_videoio470.dll
 LIBS += $$OPENCV_DIR\bin\opencv_videoio_ffmpeg470_64.dll
+
+
+
+
+
+
+
