@@ -30,6 +30,9 @@ private:
     QSize size;
     bool openRequest, releaseRequest;
 
+    QFuture<void> future;
+    bool runConcurrent;
+
 public slots:
     void enableStream();
     void disableStream();

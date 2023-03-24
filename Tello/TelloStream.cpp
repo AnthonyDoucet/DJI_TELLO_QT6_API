@@ -7,11 +7,12 @@ TelloStream::TelloStream(QString a, quint16 p): address(a),port(p){
 
     openRequest = false;
     releaseRequest = false;
+    runConcurrent = true;
 
-    QFuture<void> future = QtConcurrent::run([this]() {
+    future = QtConcurrent::run([this]() {
         Mat frame;
         qDebug() << "getStream" << QThread::currentThread();
-        while(true){
+        while(runConcurrent){
 
             if(openRequest){
                 openRequest = false;
@@ -20,7 +21,7 @@ TelloStream::TelloStream(QString a, quint16 p): address(a),port(p){
                 qDebug() << "Stream opened on " << QString::fromStdString(url) << QThread::currentThread();
             }
 
-            while(capture->isOpened()){
+            while(capture->isOpened() && runConcurrent){
                 capture->read(frame);
                 if(frame.empty() || frame.rows==0 || frame.cols==0)
                     break;
@@ -36,8 +37,10 @@ TelloStream::TelloStream(QString a, quint16 p): address(a),port(p){
 }
 
 TelloStream::~TelloStream(){
-    qDebug() << "Tello Stream deleted";
+    runConcurrent = false;
+    future.waitForFinished();
     delete capture;
+    qDebug() << "Tello Stream deleted";
 }
 
 void TelloStream::enableStream(){
@@ -59,7 +62,6 @@ void TelloStream::disableStream(){
     else{
         qDebug() << "Stream not opened";
     }
-
 }
 
 QPixmap TelloStream::mat2pixmap(Mat bgr_img){

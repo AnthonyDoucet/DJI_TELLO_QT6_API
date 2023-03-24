@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QDebug>
-#include <QThread>
 
 #include <Tello/TelloEnumTypes.h>
 #include <Tello/TelloCommand.h>
@@ -28,7 +27,6 @@ public:
     TelloStream *tello_stream;
 
 private:
-    QThread *thread_command;
     bool started = false;
 
     QString address_str = "192.168.10.1";
