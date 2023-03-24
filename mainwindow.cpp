@@ -70,6 +70,6 @@ void MainWindow::on_btn_emergency_clicked(){
 }
 
 void MainWindow::on_btn_test_clicked(){
-
+    tello->tello_command->flip();
 }
 
